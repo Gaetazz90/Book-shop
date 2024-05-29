@@ -53,8 +53,25 @@ app.post('/books', (req,res)=>{
     } )
 })
 
-app.delete('/books/:bookid', (req,res)=>{
-    const bookid = req.params.bookid
+app.put('/books/:id', (req,res)=>{
+    const bookid = req.params.id
+    const q = "update bookslist set `title` = ?, `price` = ?, `description` = ?, `cover` = ? where id = ? "
+    const values =[
+        req.body.title,
+        req.body.price,
+        req.body.description,
+        req.body.cover
+        ]
+    db.query(q, [...values,bookid], (error,data)=>{
+        if(error){
+            return error
+        }
+        return res.json(data)
+    })
+})
+
+app.delete('/books/:id', (req,res)=>{
+    const bookid = req.params.id
     const q = "delete from bookslist where id = ?"
     db.query(q, [bookid], (error,data)=>{
         if(error){
@@ -62,6 +79,12 @@ app.delete('/books/:bookid', (req,res)=>{
         }
         return res.json(data)
     })
+})
+
+
+//Rotte inesistenti
+app.use((req, res) => {
+    res.status(404).send("Error 404 - Not Found")
 })
 
 

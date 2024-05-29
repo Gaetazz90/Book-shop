@@ -44,7 +44,7 @@ function Books() {
             <p>Prezzo: {book.price}€</p>
             <p>{book.desc}</p>
             <button className="deletebtn" onClick={()=>cancelBook(book.id)}>Elimina</button>
-            <button className="updatebtn">Modifica</button>
+            <button className="updatebtn"><Link to={`/libri/modifica/${book.id}`}>Modifica</Link></button>
           </div>
         )
         )}

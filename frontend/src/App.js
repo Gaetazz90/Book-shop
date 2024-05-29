@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Books from './pages/Books';
 import AddBook from './pages/AddBook';
 import UpdateBook from './pages/UpdateBook';
+import Error404 from './pages/Error404';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/libri" element={<Books/>}/>
           <Route path="/libri/aggiungi" element={<AddBook/>}/>
-          <Route path="/libri/modifica" element={<UpdateBook/>}/>
+          <Route path="/libri/modifica/:id" element={<UpdateBook/>}/>
+          <Route path='*' element={<Error404/>}/>
         </Routes>
       </BrowserRouter>
     </div>
