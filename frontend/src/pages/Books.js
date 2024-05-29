@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 function Books() {
 
   const [books,setBooks] = useState([])
+
   useEffect(()=>{
     async function fetchAllBooks(){
       try{
@@ -21,6 +22,17 @@ function Books() {
     fetchAllBooks()
   },[])
 
+  async function cancelBook(id){
+    try {
+      await axios.delete('http://localhost:3000/books/'+id)
+      window.location.reload()
+    } 
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+
   return (
     <>
       <h1> TUTTI I LIBRI DISPONIBILI </h1>
@@ -31,7 +43,7 @@ function Books() {
             <h3>{book.title}</h3>
             <p>Prezzo: {book.price}€</p>
             <p>{book.desc}</p>
-            <button className="deletebtn">Elimina</button>
+            <button className="deletebtn" onClick={()=>cancelBook(book.id)}>Elimina</button>
             <button className="updatebtn">Modifica</button>
           </div>
         )

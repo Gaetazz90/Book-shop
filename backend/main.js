@@ -53,6 +53,17 @@ app.post('/books', (req,res)=>{
     } )
 })
 
+app.delete('/books/:bookid', (req,res)=>{
+    const bookid = req.params.bookid
+    const q = "delete from bookslist where id = ?"
+    db.query(q, [bookid], (error,data)=>{
+        if(error){
+            return error
+        }
+        return res.json(data)
+    })
+})
+
 
 //Lancio server
 app.listen(3000, ()=>{
